@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="static/css/estilosResto.css">
+    <title></title>
+</head>
+<body>
+    <div class="contenedor">
+        <div class="azul">
+            <div class="encabezado">
+                <img src="static/logo_empresa.png" alt="Logo de la empresa">
+            </div>
+            <div class="botones">
+                <a href="clientes" class="seleccionado">Clientes</a>
+                <a href="eventos">Eventos</a>
+                <a href="animadores">Animadores</a>
+                <a href="paquetes">Paquetes</a>
+                <a href="comentarios">Comentarios</a>
+                <a href="">Cerrar sesión</a>
+            </div>
+        </div>
+        <div class="contenido-panel">
+            <h2>Registrar nuevo cliente</h2>
+            <div class="recuadro-formulario">               
+                <div class="formulario">
+                    <form action="/agregarCliente" method="post">
+                        <div class="tipo-cliente">
+                            <label for="tipoCliente">Tipo de Cliente:</label>
+                            <select id="tipoCliente" name="tipoCliente" onchange="mostrarCampos()">
+                                <option value="0">Seleccionar</option>
+                                <option value="1">Persona natural</option>
+                                <option value="2">Empresa</option>
+                            </select>
+                        </div>
+
+                        <div class="datos-formulario" id="datosPersona" style="display: none;">
+                            <!-- Input fields for persona natural -->
+                            <label for="id">ID cliente:</label>
+                            <input type="text" id="id" name="id" required>
+
+                            <label for="nombres">Nombres:</label>
+                            <input type="text" id="nombres" name="nombres" required>
+
+                            <label for="apPaterno">Apellido Paterno:</label>
+                            <input type="text" id="apPaterno" name="apPaterno" required>
+
+                            <label for="apMaterno">Apellido Materno:</label>
+                            <input type="text" id="apMaterno" name="apMaterno" required>
+
+                            <label for="dni">DNI:</label>
+                            <input type="text" id="dni" name="dni" required>
+
+                            <label for="celular">Celular:</label>
+                            <input type="number" id="celular" name="celular" required>
+                        </div>
+
+                        <div class="datos-formulario" id="datosEmpresa" style="display: none;">
+                            <!-- Input fields for empresa -->
+                            <label for="nombres">ID:</label>
+                            <input type="text" id="id" name="id" required>
+
+                            <label for="nombres">Nombre:</label>
+                            <input type="text" id="nombres" name="nombres" required>
+
+                            <label for="celular">Celular:</label>
+                            <input type="text" id="celular" name="celular" required>
+
+                            <label for="ruc">RUC:</label>
+                            <input type="text" id="ruc" name="ruc" required>
+                        </div>
+
+                        <div class="botones-formulario">
+                            <button class="boton-gris-claro" type="submit">Cargar</button>
+                            <a href="clientes" class="boton-gris-claro">Cancelar</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function mostrarCampos() {
+            var tipoCliente = document.getElementById("tipoCliente").value;
+            var datosPersona = document.getElementById("datosPersona");
+            var datosEmpresa = document.getElementById("datosEmpresa");
+
+            if (tipoCliente === "1") {
+                datosPersona.style.display = "block";
+                datosEmpresa.style.display = "none";
+            } else if (tipoCliente === "2") {
+                datosPersona.style.display = "none";
+                datosEmpresa.style.display = "block";
+            }
+        }
+    </script>
+</body>
+</html>

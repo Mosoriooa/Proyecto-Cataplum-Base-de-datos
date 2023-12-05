@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="static/css/estilosResto.css">
+    <title></title>
+</head>
+<body>
+    <div class="contenedor">
+        <div class="azul">
+            <div class="encabezado">
+                <img src="static/logo_empresa.png" alt="Logo de la empresa">
+            </div>
+            <div class="botones">
+                <a href="clientes">Clientes</a>
+                <a href="eventos" class="seleccionado">Eventos</a>
+                <a href="animadores">Animadores</a>
+                <a href="paquetes">Paquetes</a>
+                <a href="comentarios">Comentarios</a>
+                <a href="">Cerrar sesión</a>
+            </div>
+        </div>
+        <div class="contenido-panel">
+            <h2>Registrar nuevo evento</h2>
+            <div class="recuadro-formulario">
+                <div class="formulario">
+                    <div class="datos-formulario">
+                        <label for="direccion">Dirección del Evento:</label>
+                        <input type="text" id="direccion" name="direccion" required>
+
+                        <label for="fechaEvento">Fecha del Evento:</label>
+                        <input type="date" id="fechaEvento" name="fechaEvento" required>
+
+                        <label for="numInvitados">Número de Invitados:</label>
+                        <input type="number" id="numInvitados" name="numInvitados" required>
+
+                        <label for="descripcion">Descripción del Evento:</label>
+                        <textarea id="descripcion" name="descripcion" required></textarea>
+
+                        <label for="idCumpleañero">ID del Cumpleañero:</label>
+                        <input type="text" id="idCumpleañero" name="idCumpleañero" required>
+
+                        <label for="idTematica">ID de la Temática:</label>
+                        <input type="text" id="idTematica" name="idTematica" required>
+                    </div>
+                    <div class="cumpleanos?">
+                        <label for="cumpleanos?">Es cumpleaños:</label>
+                        <select id="cumpleanos?" name="cumpleanos?" onchange="mostrarCampos()">
+                            <option value="0">Seleccionar</option>
+                            <option value="1">Si</option>
+                            <option value="2">No</option>
+                        </select>
+                    </div>
+                    <div class="datos-formulario" id="sicumpleanos" style="display: none;">
+                        <label for="nombres">Nombres:</label>
+                        <input type="text" id="nombres" name="nombres" required>
+
+                        <label for="dni">Edad:</label>
+                        <input type="number" id="edad" name="edad" required>
+                    </div>
+                    <div class="datos-formulario" id="nocumpleanos" style="display: none;">
+                        <!-- Otros campos para eventos que no son cumpleaños -->
+                    </div>
+                    <div class="botones-formulario">
+                        <button class="boton-gris-claro" onclick="enviarFormulario()">Cargar</button>
+                        <a href="clientes" class="boton-gris-claro">Cancelar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function mostrarCampos() {
+            var tipoCliente = document.getElementById("cumpleanos?").value;
+            var datosPersona = document.getElementById("sicumpleanos");
+            var datosEmpresa = document.getElementById("nocumpleanos");
+
+            if (tipoCliente === "1") {
+                datosPersona.style.display = "block";
+                datosEmpresa.style.display = "none";
+            } else if (tipoCliente === "2") {
+                datosPersona.style.display = "none";
+                datosEmpresa.style.display = "block";
+            }
+        }
+
+        function enviarFormulario() {
+            // Agrega aquí la lógica para enviar el formulario
+        }
+    </script>
+</body>
+</html>

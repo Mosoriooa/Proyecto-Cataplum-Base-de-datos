@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="static/css/estilosResto.css">
+    <title></title>
+</head>
+<body>
+    <div class="contenedor">
+        <div class="azul">
+            <div class="encabezado">
+                <img src="static/logo_empresa.png" alt="Logo de la empresa">
+            </div>
+            <div class="botones">
+                <a href="clientes">Clientes</a>
+                <a href="eventos">Eventos</a>
+                <a href="animadores" class="seleccionado">Animadores</a>
+                <a href="paquetes">Paquetes</a>
+                <a href="comentarios">Comentarios</a>
+                <a href="">Cerrar sesión</a>
+            </div>
+        </div>
+        <div class="contenido-panel">
+            <h2>Registrar nuevo animador</h2>
+            <div class="recuadro-formulario">
+                <div class="formulario">
+                    <div class="datos-formulario">
+                        <label for="idEvento">ID del animador:</label>
+                        <input type="text" id="idAnimador" name="idAnimador" required>
+
+                        <label for="direccion">DNI:</label>
+                        <input type="number" id="dni" name="dni" required>
+
+                        <label for="nombres">Nombres:</label>
+                        <input type="text" id="nombres" name="nombres" required>
+
+                        <label for="apPaterno">Apellido Paterno:</label>
+                        <input type="text" id="apPaterno" name="apPaterno" required>
+
+                        <label for="apMaterno">Apellido Materno:</label>
+                        <input type="text" id="apMaterno" name="apMaterno" required>
+
+                        <label for="celular">Celular:</label>
+                        <input type="number" id="celular" name="celular" required>
+
+                    </div>
+                    <div class="botones-formulario">
+                        <button class="boton-gris-claro" onclick="enviarFormulario()">Cargar</button>
+                        <a href="animadores" class="boton-gris-claro">Cancelar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function enviarFormulario() {
+            // Agrega aquí la lógica para enviar el formulario
+        }
+
+    </script>
+</body>
+</html>

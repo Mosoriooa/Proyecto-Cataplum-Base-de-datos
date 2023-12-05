@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="static/css/estilosResto.css"
+    <title></title>
+</head>
+<body>
+    <div class="contenedor">
+        <div class="azul">
+            <div class="encabezado">
+                <img src="static/logo_empresa.png" alt="Logo de la empresa">
+            </div>
+            <div class="botones">
+                <a href="clientes">Clientes</a>
+                <a href="eventos">Eventos</a>
+                <a href="animadores">Animadores</a>
+                <a href="paquetes">Paquetes</a>
+                <a href="comentarios" class="seleccionado">Comentarios</a>
+                <a href="">Cerrar sesión</a>
+            </div>
+        </div>
+        <div class="contenido-panel">
+            <h2>Comentarios</h2>
+
+            <div class="tabla">
+                <table border="1">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Descripción</th>
+                            <th>ID Evento</th>
+                            <th>ID Cliente</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for comentario in comentarios %}
+                            <tr>
+                                <td>{{ comentario[0] }}</td>
+                                <td>{{ comentario[1] }}</td>
+                                <td>{{ comentario[2] }}</td>
+                                <td>{{ comentario[3] }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

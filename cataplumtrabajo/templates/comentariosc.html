@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="static/css/estilosResto.css">
+    <title></title>
+</head>
+<body>
+    <div class="contenedor">
+        <div class="azul">
+            <div class="encabezado">
+                <img src="static/logo_empresa.png" alt="Logo de la empresa">
+            </div>
+            <div class="botones">
+                <a href="eventosc">Eventos</a>
+                <a href="paquetesc">Paquetes</a>
+                <a href="comentariosc" class="seleccionado">Comentarios</a>
+                <a href="">Cerrar sesión</a>
+            </div>
+        </div>
+        <div class="contenido-panel">
+            <h2>Comentarios</h2>
+
+            <div class="tabla">
+                <!-- Espacio para la tabla generada por Python desde la base de datos -->
+            </div>
+            
+            <!-- Botón para escribir comentario -->
+            <div class="escribir-comentario">
+                <button class="boton-gris-claro" onclick="mostrarFormulario()">Escribir Comentario</button>
+            </div>
+
+            <!-- Formulario de comentario (inicialmente oculto) -->
+            <div class="formulario" style="display: none;">
+                <textarea placeholder="Escribe tu comentario"></textarea>
+                <div class="botones-formulario">
+                    <button class="boton-gris-claro" onclick="comentar()">Comentar</button>
+                    <button class="boton-gris-claro" onclick="cancelarComentario()">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function mostrarFormulario() {
+            document.querySelector('.formulario').style.display = 'block';
+        }
+
+        function comentar() {
+            // Lógica para procesar el comentario, puedes agregarla aquí
+            // Después de procesar, puedes ocultar el formulario nuevamente
+            document.querySelector('.formulario').style.display = 'none';
+        }
+
+        function cancelarComentario() {
+            // Simplemente oculta el formulario si se cancela
+            document.querySelector('.formulario').style.display = 'none';
+        }
+    </script>
+</body>
+</html>

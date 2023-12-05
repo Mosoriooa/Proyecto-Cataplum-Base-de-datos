@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="static/css/estilosResto.css"
+    <title></title>
+</head>
+<body>
+    <div class="contenedor">
+        <div class="azul">
+            <div class="encabezado">
+                <img src="/static/logo_empresa.png" alt="Logo de la empresa">
+            </div>
+            <div class="botones">
+                <a href="clientes">Clientes</a>
+                <a href="eventos">Eventos</a>
+                <a href="animadores">Animadores</a>
+                <a href="paquetes" class="seleccionado">Paquetes</a>
+                <a href="comentarios">Comentarios</a>
+                <a href="">Cerrar sesión</a>
+            </div>
+        </div>
+        <div class="contenido-panel">
+            <h2>Tabla: Paquete</h2>
+            <div class="filtrar-agregar">
+                <div class="filtrar">
+                    <button class="boton-gris-claro" id="btnFiltrar">Filtrar por</button>
+                    <div class="menu-filtrar" id="menuFiltrar">
+                        <a href="#">1</a>
+                        <a href="#">2</a>
+                        <a href="#">3</a>
+                        <a href="#">4</a>
+                        <a href="#">5</a>
+                    </div>
+                </div>
+                <div class="agregar">
+                    <button class="boton-gris-claro" id="btnAgregar">Agregar paquetes</button>
+                </div>
+            </div>
+            <div class="tabla">
+                <!-- Espacio para la tabla generada por Python desde la base de datos -->
+            </div>
+        </div>
+    </div>
+    <script>
+        document.getElementById("btnFiltrar").addEventListener("click", function() {
+            document.getElementById("menuFiltrar").classList.toggle("mostrar");
+        });
+
+        document.getElementById("btnAgregar").addEventListener("click", function() {
+            // Lógica para agregar cliente
+        });
+    </script>
+</body>
+</html>
+

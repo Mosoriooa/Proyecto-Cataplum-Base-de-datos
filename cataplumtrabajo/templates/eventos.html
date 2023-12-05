@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="static/css/estilosResto.css"
+    <title></title>
+</head>
+<body>
+    <div class="contenedor">
+        <div class="azul">
+            <div class="encabezado">
+                <img src="static/logo_empresa.png" alt="Logo de la empresa">
+            </div>
+            <div class="botones">
+                <a href="clientes">Clientes</a>
+                <a href="eventos" class="seleccionado">Eventos</a>
+                <a href="animadores">Animadores</a>
+                <a href="paquetes">Paquetes</a>
+                <a href="comentarios">Comentarios</a>
+                <a href="">Cerrar sesión</a>
+            </div>
+        </div>
+        <div class="contenido-panel">
+            <h2>Tabla: Evento</h2>
+            <div class="filtrar-agregar">
+                <div class="filtrar">
+                    <button class="boton-gris-claro" id="btnFiltrar">Filtrar por</button>
+                    <div class="menu-filtrar" id="menuFiltrar">
+                        <a href="#">1</a>
+                        <a href="#">2</a>
+                        <a href="#">3</a>
+                        <a href="#">4</a>
+                        <a href="#">5</a>
+                    </div>
+                </div>
+                <div class="agregar">
+                    <a href="agregarEvento" class="boton-gris-claro" id="btnAgregar">Agregar eventos</a>
+                </div>
+            </div>
+            <div class="tabla">
+                <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Dirección</th>
+                <th>Fecha del Evento</th>
+                <th>Número de Invitados</th>
+                <th>Descripción</th>
+                <th>ID Cumpleañero</th>
+                <th>ID Temática</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for evento in eventos %}
+                <tr>
+                    <td>{{ evento[0] }}</td>
+                    <td>{{ evento[1] }}</td>
+                    <td>{{ evento[2] }}</td>
+                    <td>{{ evento[3] }}</td>
+                    <td>{{ evento[4] }}</td>
+                    <td>{{ evento[5] }}</td>
+                    <td>{{ evento[6] }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.getElementById("btnFiltrar").addEventListener("click", function() {
+            document.getElementById("menuFiltrar").classList.toggle("mostrar");
+        });
+
+        document.getElementById("btnAgregar").addEventListener("click", function() {
+            // Lógica para agregar cliente
+        });
+    </script>
+</body>
+</html>
+

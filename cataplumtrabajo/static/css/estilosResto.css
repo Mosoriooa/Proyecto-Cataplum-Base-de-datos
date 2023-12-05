@@ -1,0 +1,230 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.contenedor {
+    display: flex;
+    height: 100vh;
+}
+
+.azul {
+    flex: 1;
+    background-color: #224083;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.encabezado {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.botones {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.botones a {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    color: white;
+    text-decoration: none;
+    text-align: center;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.botones a:hover {
+    background-color: #415b93; /* Azul un poco más claro */
+    text-decoration: underline;
+}
+
+.botones a.seleccionado {
+    background-color: #415b93; /* Azul un poco más claro */
+    text-decoration: underline;
+}
+
+.imagen-derecha {
+    flex: 3;
+}
+
+.imagen-derecha img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.contenido-panel {
+    flex: 3;
+    padding: 20px;
+}
+
+.tabla {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.tabla th, .tabla td {
+    border: 1px solid black;
+    padding: 8px;
+    text-align: left;
+}
+
+.filtrar-agregar {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.filtrar, .agregar {
+    width: 48%;
+}
+
+.boton-gris-claro {
+    background-color: #ccc;
+    border: 1px solid #999;
+    border-radius: 5px;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.menu-filtrar {
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    padding: 5px;
+}
+.menu-filtrar a {
+    display: block;
+    padding: 8px;
+    text-decoration: none;
+    color: #333;
+    transition: background-color 0.3s;
+}
+.menu-filtrar a:hover {
+    background-color: #f0f0f0;
+}
+.menu-filtrar.mostrar {
+    display: block;
+}
+
+
+
+/* Agregamos estilos para el slider */
+.slider {
+    position: relative;
+    width: 90%;
+    height: 80vh;
+    overflow: hidden;
+}
+.slider img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    position: absolute;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+.slider img:first-child {
+    opacity: 1;
+}
+@keyframes cambioImagen {
+    0%, 100% {
+        opacity: 0;
+    }
+    16.666% {
+        opacity: 1;
+    }
+}
+.slider img:nth-child(1) {
+    animation: cambioImagen 25s infinite 0s;
+}
+.slider img:nth-child(2) {
+    animation: cambioImagen 25s infinite 5s;
+}
+.slider img:nth-child(3) {
+    animation: cambioImagen 25s infinite 10s;
+}
+.slider img:nth-child(4) {
+    animation: cambioImagen 25s infinite 15s;
+}
+.slider img:nth-child(5) {
+    animation: cambioImagen 25s infinite 20s;
+}
+.slider img:nth-child(6) {
+    animation: cambioImagen 25s infinite 25s; 
+}
+
+
+.escribir-comentario {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+.barra-comentario {
+    display: none;
+    flex-grow: 1;
+    flex-direction: column;
+}
+.barra-comentario textarea {
+    margin-top: 10px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    resize: vertical;
+}
+.botones-comentario {
+    display: flex;
+    justify-content: space-between;
+}
+.escribir-comentario {
+    margin-top: 20px;
+}
+
+
+
+.formulario {
+    margin-top: 20px;
+}
+
+.formulario textarea {
+    width: 100%;
+    height: 100px;
+    margin-bottom: 10px;
+    padding: 5px;
+}
+
+.botones-formulario button {
+    margin-right: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.datos-formulario label,
+.datos-formulario input {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.botones-formulario button,
+.botones-formulario a {
+    margin-top: 10px;
+}
+
+
+.recuadro-formulario {
+    overflow-y: auto;
+    max-height: 400px; /* ajusta según sea necesario */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+    margin-top: 20px;
+}

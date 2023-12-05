@@ -1,0 +1,127 @@
+CREATE TABLE TIPOCLIENTE (
+    ID INT PRIMARY KEY,
+    descripcion VARCHAR2(50) NOT NULL
+);
+
+INSERT INTO TIPOCLIENTE (ID, descripcion) VALUES (1, 'Persona Natural');
+INSERT INTO TIPOCLIENTE (ID, descripcion) VALUES (2, 'Persona Jurídica');
+
+CREATE TABLE CLIENTE(
+    ID INT PRIMARY KEY,
+    ID_TIPO_CLIENTE INT,
+    Nombres VARCHAR(50),
+    ApellidoPaterno VARCHAR(30),
+    ApellidoMaterno VARCHAR(30),
+    Celular VARCHAR(13),
+    DNI VARCHAR(30),
+    RUC VARCHAR(30),
+    CONSTRAINT fk_tipo_cliente FOREIGN KEY (ID_TIPO_CLIENTE) REFERENCES TIPOCLIENTE(ID)
+);
+
+INSERT INTO Cliente (ID, ID_TIPO_CLIENTE, Nombres, ApellidoPaterno, ApellidoMaterno, Celular, DNI, RUC) VALUES (1, 1, 'Juan', 'Pérez', 'González', '987654321', '12345678', NULL);
+INSERT INTO Cliente (ID, ID_TIPO_CLIENTE, Nombres, ApellidoPaterno, ApellidoMaterno, Celular, DNI, RUC) VALUES (2, 2, 'Empresa XYZ', NULL, NULL, '999888777', NULL, '12345678901');
+INSERT INTO Cliente (ID, ID_TIPO_CLIENTE, Nombres, ApellidoPaterno, ApellidoMaterno, Celular, DNI, RUC) VALUES (3, 1, 'María', 'Gómez', 'López', '555111222', '87654321', NULL);
+
+CREATE TABLE CUMPLEANIERO(
+    ID INT PRIMARY KEY,
+    Edad INT,
+    Nombre VARCHAR(30)
+);
+
+INSERT INTO CUMPLEANIERO (ID, Edad, Nombre) VALUES (1, 7, 'Juan Pérez');
+INSERT INTO CUMPLEANIERO (ID, Edad, Nombre) VALUES (2, 11, 'Ana García');
+INSERT INTO CUMPLEANIERO (ID, Edad, Nombre) VALUES (3, 5, 'Carlos Rodríguez');
+
+INSERT INTO TEMATICA (ID, Nombre, Descripcion) VALUES (1, 'Fiesta PawPatrol', 'Evento con disfracez y titeres');
+INSERT INTO TEMATICA (ID, Nombre, Descripcion) VALUES (2, 'Fiesta princesas', 'Evento con princesas de Disney');
+INSERT INTO TEMATICA (ID, Nombre, Descripcion) VALUES (3, 'Fiesta espias', 'Disfracez de espias');
+
+CREATE TABLE TEMATICA(
+    ID INT PRIMARY KEY,
+    Nombre VARCHAR(30),
+    Descripcion VARCHAR(30)
+);
+
+
+CREATE TABLE EVENTO (
+    ID INT PRIMARY KEY,
+    Direccion VARCHAR2(100) NOT NULL,
+    FechaEvento DATE NOT NULL,
+    NroInvitados INT,
+    Descripcion VARCHAR(100),
+    ID_CUMPLEANIERO INT,
+    ID_TEMATICA INT,
+    CONSTRAINT fk_id_cumpleaniero FOREIGN KEY (ID_CUMPLEANIERO) REFERENCES CUMPLEANIERO(ID),
+    CONSTRAINT fk_id_tematica FOREIGN KEY (ID_TEMATICA) REFERENCES TEMATICA(ID)
+);
+
+INSERT INTO EVENTO (ID, Direccion, FechaEvento, NroInvitados, Descripcion, ID_CUMPLEANIERO, ID_TEMATICA) VALUES (1, '123 Calle Principal', TO_DATE('2023-12-01', 'YYYY-MM-DD'), 100, 'Evento Corporativo', NULL, NULL);
+INSERT INTO EVENTO (ID, Direccion, FechaEvento, NroInvitados, Descripcion, ID_CUMPLEANIERO, ID_TEMATICA) VALUES  (2, '456 Avenida Secundaria', TO_DATE('2023-12-15', 'YYYY-MM-DD'), 50, 'Fiesta de Cumpleaños',1,1);
+INSERT INTO EVENTO (ID, Direccion, FechaEvento, NroInvitados, Descripcion, ID_CUMPLEANIERO, ID_TEMATICA) VALUES  (3, '789 Plaza Central', TO_DATE('2023-11-25', 'YYYY-MM-DD'), 200, 'Conferencia', NULL, NULL);
+
+
+CREATE TABLE RESERVA (
+    ID INT PRIMARY KEY,
+    ID_CLIENTE INT NOT NULL,
+    ID_EVENTO INT NOT NULL,
+    FechaRegistro TIMESTAMP DEFAULT SYSDATE,
+    CONSTRAINT fk_id_cliente FOREIGN KEY (ID_CLIENTE) REFERENCES CLIENTE(ID),
+    CONSTRAINT fk_id_evento FOREIGN KEY (ID_EVENTO) REFERENCES EVENTO(ID)
+);
+
+INSERT INTO RESERVA (ID, ID_CLIENTE, ID_EVENTO, FechaRegistro) VALUES (1, 1, 1, SYSTIMESTAMP);
+INSERT INTO RESERVA (ID, ID_CLIENTE, ID_EVENTO, FechaRegistro) VALUES (2, 2, 2, SYSTIMESTAMP);
+INSERT INTO RESERVA (ID, ID_CLIENTE, ID_EVENTO, FechaRegistro) VALUES (3, 3, 3, SYSTIMESTAMP);
+
+CREATE TABLE METODOPAGO (
+    ID INT PRIMARY KEY,
+    Nombre VARCHAR2(50) NOT NULL
+);
+
+INSERT INTO METODOPAGO (ID, Nombre) VALUES (1, 'Efectivo');
+INSERT INTO METODOPAGO (ID, Nombre) VALUES (2, 'Tarjeta de Crédito');
+INSERT INTO METODOPAGO (ID, Nombre) VALUES (3, 'Transferencia Bancaria');
+
+
+CREATE TABLE BOLETA (
+    ID INT PRIMARY KEY,
+    FechaGenerada TIMESTAMP DEFAULT SYSDATE,
+    CostoTotal NUMBER,
+    ID_METODOPAGO INT NOT NULL,
+    ID_RESERVA INT NOT NULL,
+    CONSTRAINT fk_id_metodo_pago FOREIGN KEY (ID_METODOPAGO) REFERENCES MetodoPago(ID),
+    CONSTRAINT fk_id_reserva FOREIGN KEY (ID_RESERVA) REFERENCES RESERVA(ID)
+);
+
+INSERT INTO BOLETA (ID, FechaGenerada, CostoTotal, ID_METODOPAGO, ID_RESERVA) VALUES (1, SYSTIMESTAMP, 1500.00, 2, 1);
+INSERT INTO BOLETA (ID, FechaGenerada, CostoTotal, ID_METODOPAGO, ID_RESERVA) VALUES (2, SYSTIMESTAMP, 1200.00, 1, 2);
+INSERT INTO BOLETA (ID, FechaGenerada, CostoTotal, ID_METODOPAGO, ID_RESERVA) VALUES (3, SYSTIMESTAMP, 1000.00, 3, 3);
+
+
+CREATE TABLE FEEDBACKCLIENTE(
+    ID INT PRIMARY KEY,
+    Descripcion VARCHAR(255),
+    ID_EVENTO INT,
+    ID_CLIENTE INT,
+    CONSTRAINT fk_id_evento_feedback FOREIGN KEY (ID_EVENTO) REFERENCES EVENTO(ID),
+    CONSTRAINT fk_id_cliente_feedback FOREIGN KEY (ID_CLIENTE) REFERENCES CLIENTE(ID)
+);
+
+INSERT INTO FEEDBACKCLIENTE (ID, Descripcion, ID_EVENTO, ID_CLIENTE) VALUES (1, 'Excelente evento, todos disfrutamos mucho', 1, 2);
+INSERT INTO FEEDBACKCLIENTE (ID, Descripcion, ID_EVENTO, ID_CLIENTE) VALUES (2, 'La temática fue increíble, gracias por la organización', 3, 1);
+INSERT INTO FEEDBACKCLIENTE (ID, Descripcion, ID_EVENTO, ID_CLIENTE) VALUES (3, 'Me encantó la música y la comida, muy bien planificado', 2, 3);
+
+
+CREATE TABLE ANIMADOR(
+    ID INT PRIMARY KEY,
+    DNI VARCHAR(8),
+    Nombres VARCHAR(50),
+    ApellidoPaterno VARCHAR(30),
+    ApellidoMaterno VARCHAR(30),
+    Celular VARCHAR(13),
+    Disponibilidad VARCHAR(30)
+);
+
+INSERT INTO ANIMADOR (ID, DNI, Nombres, ApellidoPaterno, ApellidoMaterno, Celular, Disponibilidad) VALUES (1, '12345678', 'Juan', 'Gómez', 'López', '987654321', 'Lunes a Viernes');
+INSERT INTO ANIMADOR (ID, DNI, Nombres, ApellidoPaterno, ApellidoMaterno, Celular, Disponibilidad) VALUES (2, '87654321', 'María', 'Martínez', 'Rodríguez', '555111222', 'Fines de semana');
+INSERT INTO ANIMADOR (ID, DNI, Nombres, ApellidoPaterno, ApellidoMaterno, Celular, Disponibilidad) VALUES (3, '23456789', 'Carlos', 'Pérez', 'García', '999888777', 'Flexible');

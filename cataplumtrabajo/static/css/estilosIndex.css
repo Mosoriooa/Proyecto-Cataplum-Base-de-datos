@@ -1,0 +1,58 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.contenedor {
+    display: flex;
+    height: 100vh;
+}
+
+.izquierda {
+    flex: 1;
+    background-color: #ECDF14;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.encabezado {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.formulario {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.input-gris {
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 2px solid #666; /* Gris más claro */
+    border-radius: 5px;
+    background-color: #ddd; /* Gris aún más claro */
+    color: #333; /* Letras un poco más oscuras */
+}
+
+button {
+    padding: 10px;
+    background-color: #224083;
+    color: white;
+    border: 2px solid black;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.imagen-derecha {
+    flex: 3;
+}
+
+.imagen-derecha img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
