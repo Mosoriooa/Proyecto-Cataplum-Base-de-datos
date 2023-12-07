@@ -1,8 +1,8 @@
 import cx_Oracle
 from flask import Flask, request, render_template
+from datetime import datetime
 
 conn = 'USERDB/PASSWORD@localhost:1521/xe'
-
 
 try:
     connection = cx_Oracle.connect(conn)
@@ -45,41 +45,42 @@ def mostrar_clientes():
         return f'Error al obtener datos de la base de datos: {ex}'
 
 
-'''
-@app.route('/eventos')
-def eventos():
-    return render_template('eventos.html')
-'''
-
 @app.route('/eventos')
 def mostrar_eventos():
     try:
         conexion_Oracle = conexionBD()
         cursor = conexion_Oracle.cursor()
+        cursor2 = conexion_Oracle.cursor()
+        cursor3 = conexion_Oracle.cursor()
 
-        cursor.execute("SELECT * FROM EVENTO")
+
+
+        cursor.execute("SELECT e.ID AS id_evento, r.ID AS id_reserva, c.ID AS id_cliente, c.Nombres AS nombre_cliente, e.Direccion, e.FechaEvento, e.NroInvitados, e.Descripcion, e.ID_CUMPLEANIERO, e.ID_TEMATICA  FROM RESERVA r JOIN EVENTO e ON r.ID_EVENTO = e.ID JOIN CLIENTE c ON r.ID_CLIENTE = c.ID ORDER BY e.ID")
+        cursor2.execute("SELECT * FROM CUMPLEANIERO ORDER BY ID")
+        cursor3.execute("SELECT * FROM TEMATICA ORDER BY ID")
+
+
         eventos = cursor.fetchall()
+        cumpleanieros = cursor2.fetchall()
+        tematicas = cursor3.fetchall()
+
 
         cursor.close()
+        cursor2.close()
+        cursor3.close()
+
+
         conexion_Oracle.close()
 
-        return render_template('eventos.html', eventos=eventos)
+        return render_template('eventos.html', eventos=eventos, cumpleanieros = cumpleanieros, tematicas = tematicas)
     except Exception as ex:
         return f'Error al obtener datos de la base de datos: {ex}'
 
-@app.route('/agregarEvento')
-def agregarEvento():
-    return render_template('agregarEvento.html')
 
 @app.route('/eventosc')
 def eventosc():
     return render_template('eventosc.html')
 
-'''
-@app.route('/animadores')
-def animadores():
-    return render_template('animadores.html')
-'''
 
 @app.route('/animadores')
 def mostrar_animadores():
@@ -87,7 +88,7 @@ def mostrar_animadores():
         conexion_Oracle = conexionBD()
         cursor = conexion_Oracle.cursor()
 
-        cursor.execute("SELECT * FROM ANIMADOR")
+        cursor.execute("SELECT * FROM ANIMADOR ORDER BY ID")
         animadores = cursor.fetchall()
 
         cursor.close()
@@ -97,9 +98,6 @@ def mostrar_animadores():
     except Exception as ex:
         return f'Error al obtener datos de la base de datos: {ex}'
 
-@app.route('/agregarAnimadores')
-def agregarAnimadores():
-    return render_template('agregarAnimadores.html')
 
 @app.route('/paquetes')
 def paquetes():
@@ -131,55 +129,28 @@ def comentariosc():
     return render_template('comentariosc.html')
 
 
-'''@app.route('/agregarCliente')
-def agregarCliente():
-    return render_template('agregarCliente.html')'''
-
 @app.route('/agregarCliente', methods=['GET', 'POST'])
 def agregarCliente():
     print("Route reached")
     if request.method == 'POST':
         print("POST request received")
         try:
-            tipo_cliente = request.form['tipoCliente']
-            
+            id_cliente = request.form['id']
+            id_tipo_cliente = request.form['idtipocliente']
+            nombres = request.form['nombres']
+            ap_paterno = request.form['apPaterno']
+            ap_materno = request.form['apMaterno']
+            dni = request.form['dni']
+            celular = request.form['celular']
+            ruc = request.form['ruc']
 
-            if tipo_cliente == '1':
-                id_cliente = request.form['id']
-                nombres = request.form['nombres']
-                ap_paterno = request.form['apPaterno']
-                ap_materno = request.form['apMaterno']
-                dni = request.form['dni']
-                celular = request.form['celular']
+            conexion_Oracle = conexionBD()
+            cursor = conexion_Oracle.cursor()
 
-                conexion_Oracle = conexionBD()
-                cursor = conexion_Oracle.cursor()
-
-                cursor.execute("INSERT INTO Cliente (ID, ID_TIPO_CLIENTE, Nombres, ApellidoPaterno, ApellidoMaterno, Celular, DNI, RUC) VALUES (:1, :2, :3, :4, :5, :6, :7, :8)",
-                                                                                                                                                (id_cliente, 1, nombres, ap_paterno, ap_materno, celular, dni, None))
-                connection.commit()
-                cursor.close()
-                connection.close()
-                
-
-            elif tipo_cliente == '2':
-                id_empresa = request.form['id']
-                nombres = request.form['nombres']
-                celular_empresa = request.form['celular']
-                ruc = request.form['ruc']
-                
-                cursor = connection.cursor()
-                
-                
-                cursor.execute("INSERT INTO Cliente (ID, ID_TIPO_CLIENTE, Nombres, ApellidoPaterno, ApellidoMaterno, Celular, DNI, RUC) VALUES (:1, :2, :3, :4, :5, :6, :7, :8)",
-                               (id_empresa, 2, nombres, None, None, celular_empresa, None, ruc))
-
-                connection.commit()
-                cursor.close()
-                connection.close()
-
-
-            # Add any additional logic or validation as needed
+            cursor.execute("INSERT INTO Cliente (ID, ID_TIPO_CLIENTE, Nombres, ApellidoPaterno, ApellidoMaterno, Celular, DNI, RUC) VALUES (:1, :2, :3, :4, :5, :6, :7, :8)", (id_cliente, id_tipo_cliente, nombres, ap_paterno, ap_materno, celular, dni, ruc))
+            connection.commit()
+            cursor.close()
+            connection.close()
 
             return render_template('agregarCliente.html')
         except Exception as ex:
@@ -187,12 +158,86 @@ def agregarCliente():
     else:
         return render_template('agregarCliente.html')
 
+@app.route('/agregarAnimador', methods=['GET', 'POST'])
+def agregarAnimador():
+    if request.method == 'POST':
+        print("POST request received")
+        try:
+            id_animador = request.form['id']
+            dni = request.form['dni']
+            nombres = request.form['nombres']
+            apPaterno = request.form['apPaterno']
+            apMaterno = request.form['apMaterno']
+            celular = request.form['celular']
+            disponibilidad = None  
+
+            conexion_Oracle = conexionBD()
+            cursor = conexion_Oracle.cursor()
+
+            cursor.execute("INSERT INTO ANIMADOR (ID, DNI, Nombres, ApellidoPaterno, ApellidoMaterno, Celular, Disponibilidad) VALUES (:1, :2, :3, :4, :5, :6, :7)", (id_animador, dni, nombres, apPaterno, apMaterno, celular, disponibilidad))
+
+            conexion_Oracle.commit()
+            cursor.close()
+            conexion_Oracle.close()
+
+            return render_template('agregarAnimador.html')
+
+        except Exception as ex:
+            return f'Error al guardar animador: {ex}'
+    else:
+        return render_template('agregarAnimador.html')
+    
+@app.route('/agregarEvento', methods=['GET', 'POST'])
+def agregarEvento():
+    if request.method == 'POST':
+        print("POST request received")
+        try:
+            idCliente = request.form['idCliente']
+            dirr = request.form['direccion']
+            fecha_input = request.form['fechaEvento']
+            numInvitados = request.form['numInvitados']
+            descripcion = request.form['descripcion']
+            idTematica = request.form['idTematica']
+            nombres = request.form['nombres']
+            edad  = request.form['edad']
+
+            fecha_validada = datetime.strptime(fecha_input, '%Y-%m-%d')
+
+            conexion_Oracle = conexionBD()
+            cursor = conexion_Oracle.cursor()
+            cursor2 = conexion_Oracle.cursor()
+            cursor3 = conexion_Oracle.cursor()
+
+            # Call the INSERTAR_CUMPLEANIERO procedure
+            p_id_cumpleaniero = cursor2.var(cx_Oracle.NUMBER)
+            cursor2.callproc("INSERTAR_CUMPLEANIERO", [edad, nombres, p_id_cumpleaniero])
+
+            # Retrieve the OUT parameter value
+            idCumpleañero = p_id_cumpleaniero.getvalue()
+
+            
+            p_id_evento = cursor.var(cx_Oracle.NUMBER)
+            cursor.callproc("INSERTAR_EVENTO", [dirr, fecha_validada, numInvitados, descripcion, idCumpleañero, idTematica, p_id_evento])
+            
+            # Retrieve the OUT parameter value
+            id_evento = p_id_evento.getvalue()
+            print(id_evento)
 
 
+            cursor3.callproc("INSERTAR_RESERVA", [idCliente, id_evento])
 
+            conexion_Oracle.commit()
+            cursor.close()
+            cursor2.close()
+            cursor3.close()
+            conexion_Oracle.close()
 
+            return render_template('agregarEvento.html')
 
-
+        except Exception as ex:
+            return f'Error al guardar Evento: {ex}'
+    else:
+        return render_template('agregarEvento.html')
 
 
 if __name__ == '__main__':

@@ -18,53 +18,109 @@
                 <a href="animadores">Animadores</a>
                 <a href="paquetes">Paquetes</a>
                 <a href="comentarios">Comentarios</a>
-                <a href="">Cerrar sesión</a>
+                <a href="/">Cerrar sesión</a>
             </div>
         </div>
         <div class="contenido-panel">
             <h2>Tabla: Evento</h2>
-            <div class="filtrar-agregar">
+
+            <div class="filtrar-agregar-editar-eliminar">
                 <div class="filtrar">
                     <button class="boton-gris-claro" id="btnFiltrar">Filtrar por</button>
                     <div class="menu-filtrar" id="menuFiltrar">
-                        <a href="#">1</a>
-                        <a href="#">2</a>
-                        <a href="#">3</a>
-                        <a href="#">4</a>
-                        <a href="#">5</a>
+                        <a href="#">Fecha</a>
+                        <a href="#">Número de invitados</a>
+                        <a href="#">ID de la temática</a>
                     </div>
                 </div>
                 <div class="agregar">
-                    <a href="agregarEvento" class="boton-gris-claro" id="btnAgregar">Agregar eventos</a>
+                    <a href="agregarEvento" class="boton-gris-claro" id="btnAgregar">Agregar evento</a>
+                </div>
+                <div class="editar">
+                    <a href="eventos" class="boton-gris-claro" id="btnEditar">Editar evento</a>
+                </div>
+                <div class="eliminar">
+                    <a href="eventos" class="boton-gris-claro" id="btnEliminar">Eliminar evento</a>
                 </div>
             </div>
+            
             <div class="tabla">
                 <table border="1">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Dirección</th>
-                <th>Fecha del Evento</th>
-                <th>Número de Invitados</th>
-                <th>Descripción</th>
-                <th>ID Cumpleañero</th>
-                <th>ID Temática</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for evento in eventos %}
-                <tr>
-                    <td>{{ evento[0] }}</td>
-                    <td>{{ evento[1] }}</td>
-                    <td>{{ evento[2] }}</td>
-                    <td>{{ evento[3] }}</td>
-                    <td>{{ evento[4] }}</td>
-                    <td>{{ evento[5] }}</td>
-                    <td>{{ evento[6] }}</td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>ID Reserva</th>
+                            <th>ID Cliente</th>
+                            <th>Nombre Cliente</th>
+                            
+                            <th>Dirección</th>
+                            <th>Fecha del Evento</th>
+                            <th>Número de Invitados</th>
+                            <th>Descripción</th>
+                            <th>ID Cumpleañero</th>
+                            <th>ID Temática</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for evento in eventos %}
+                            <tr>
+                                <td>{{ evento[0] }}</td>
+                                <td>{{ evento[1] }}</td>
+                                <td>{{ evento[2] }}</td>
+                                <td>{{ evento[3] }}</td>
+                                <td>{{ evento[4] }}</td>
+                                <td>{{ evento[5] }}</td>
+                                <td>{{ evento[6] }}</td>
+                                <td>{{ evento[7] }}</td>
+                                <td>{{ evento[8] }}</td>
+                                <td>{{ evento[9] }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="tablaCumpleaniero">
+                <h2>Tabla: Cumpleañero</h2>
+                <table border="1">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Edad</th>
+                            <th>Nombre</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for cumpleaniero in cumpleanieros %}
+                            <tr>
+                                <td>{{ cumpleaniero[0] }}</td>
+                                <td>{{ cumpleaniero[1] }}</td>
+                                <td>{{ cumpleaniero[2] }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="tablaTematica">
+                <h2>Tabla: Tematica</h2>
+                <table border="1">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Descripción</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for tematica in tematicas %}
+                            <tr>
+                                <td>{{ tematica[0] }}</td>
+                                <td>{{ tematica[1] }}</td>
+                                <td>{{ tematica[2] }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
