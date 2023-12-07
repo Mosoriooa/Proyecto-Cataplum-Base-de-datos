@@ -18,12 +18,12 @@
                 <a href="animadores" class="seleccionado">Animadores</a>
                 <a href="paquetes">Paquetes</a>
                 <a href="comentarios">Comentarios</a>
-                <a href="">Cerrar sesión</a>
+                <a href="/">Cerrar sesión</a>
             </div>
         </div>
         <div class="contenido-panel">
             <h2>Tabla: Animador</h2>
-            <div class="filtrar-agregar">
+            <div class="filtrar-agregar-editar-eliminar">
                 <div class="filtrar">
                     <button class="boton-gris-claro" id="btnFiltrar">Filtrar por</button>
                     <div class="menu-filtrar" id="menuFiltrar">
@@ -36,6 +36,12 @@
                 </div>
                 <div class="agregar">
                     <a href="agregarAnimador" class="boton-gris-claro" id="btnAgregar">Agregar animador</a>
+                </div>
+                <div class="editar">
+                    <a href="animadores" class="boton-gris-claro" id="btnEditar">Editar animador</a>
+                </div>
+                <div class="eliminar">
+                    <a href="animadores" class="boton-gris-claro" id="btnEliminar">Eliminar animador</a>
                 </div>
             </div>
             <div class="tabla">
@@ -68,6 +74,8 @@
             </div>
         </div>
     </div>
+
+    <!--
     <script>
         document.getElementById("btnFiltrar").addEventListener("click", function() {
             document.getElementById("menuFiltrar").classList.toggle("mostrar");
@@ -77,6 +85,7 @@
             // Lógica para agregar cliente
         });
     </script>
+    -->
 </body>
 </html>
 

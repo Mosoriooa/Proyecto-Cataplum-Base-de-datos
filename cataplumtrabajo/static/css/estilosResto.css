@@ -76,14 +76,14 @@ body {
     text-align: left;
 }
 
-.filtrar-agregar {
+.filtrar-agregar-editar-eliminar {
     display: flex;
     justify-content: space-between;
     margin-bottom: 20px;
 }
 
-.filtrar, .agregar {
-    width: 48%;
+.filtrar, .agregar, .editar, .eliminar {
+    width: 23%; 
 }
 
 .boton-gris-claro {
